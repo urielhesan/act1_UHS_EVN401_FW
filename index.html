@@ -6,20 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad 1 UHS EVN401 FW UTL</title>
     <link rel="stylesheet" href="css/ejs3.css" type="text/css"/>
-    <!--Links de bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    
 </head>
 <body>
     <body background="img/javascript_logo3.png">
     <header>
-        <h1><a href="#">Actividad 1</a></h1>
+        <h1><a href="#">Actividad 1 y 5</a></h1>
     </header>
     <section class="row container-fluid" id="todo">
         <aside id="lateral" class="col-sm-3">
@@ -28,6 +24,7 @@
                 <option value="bienv" default>Seleccione uno...</option>
                 <option value="cajas">Cajas</option>
                 <option value="cuest">Cuestionario</option>
+                <option value="nodos">Reservación de Mesas</option>
             </select>
         </aside>  
         <section id="principal" class="col-sm-9">
@@ -107,6 +104,36 @@
                     <div id="pr5"></div><br>
                 </div>
             </article>
+            <article id="nodos" class="contenedor">
+                <h3>Reservación de mesas</h3>
+                <select id="reservacion">
+                    <option value="0">Seleccione una opción</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <p id="mesas"></p>
+                <a id="mostrar">Mostrar</a>
+            </article>
+            <!--<article id="ReservMesas" class="contenedor">
+                <h3>Reservación de Mesas</h3>
+                <h2>Eliga el número de mesas</h2>
+                <select id="NumMesas">
+                    <option value="0">Seleccione una opción</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <p>&nbsp;&nbsp;&nbsp;</p>
+                <p id="mesas"></p>
+                <a id="mostrar">Mostrar</a>
+            </article>-->
+            <p id="resultado" class="res">
+                Mostrar resultados desde Javascript
+            </p>
+            
         </section>
     </section>
 <script src="js/funcionalidad.js"></script>
