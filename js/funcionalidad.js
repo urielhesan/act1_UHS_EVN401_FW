@@ -1,15 +1,11 @@
 document.getElementById('temas').addEventListener("change",temaSeleccionado);
-//función para inicializar variables, limpiar articulos y mostrar cajas
 function temaSeleccionado(){
     document.getElementById("numcaj").value=null;
     document.getElementById("colorcaj").value=null;
-    //getElementbyTagName convierte en arreglo porque guarda más de un elemento
     capas=document.getElementsByTagName("article");
-    //ocultar varios elementos
     for(i=0; i<capas.length;i++){
         capas[i].style.display="none";
     }
-    //almacenar el dato de la opción del usuario
     var articulo=document.getElementById("temas").value;
     if(articulo!=null){
         document.getElementById("bienv").style.display="none";
@@ -71,35 +67,84 @@ function mostrarResultados(){
     document.getElementById("pr3").innerHTML=preg_3+"<br>"+resp_3;
     document.getElementById("pr4").innerHTML=preg_4+"<br>"+resp_4;
     document.getElementById("pr5").innerHTML=preg_5+"<br>"+resp_5;
+}
 
+/*document.getElementById('NumMesas').addEventListener("change",function(){mesas();});
 
-    /*var preg_1=document.getElementById("preg_1");
-    var resp_1=document.getElementById("resp1").value;
-    var preg_2=document.getElementById("preg_2");
-    var resp_2=document.getElementById("resp2").value;
-    var preg_3=document.getElementById("preg_3");
-    var resp_3=document.getElementById("resp3").value;
-    var preg_4=document.getElementById("preg_4");
-    var resp_4=document.getElementById("resp4").value;
-    var preg_5=document.getElementById("preg_5");
-    var resp_5=document.getElementById("resp5").value;
-    var mostrar1=preg_1+" <br> "+resp_1;
-    var mostrar2=preg_2+" <br> "+resp_2;
-    var mostrar3=preg_3+" <br> "+resp_3;
-    var mostrar4=preg_4+" <br> "+resp_4;
-    var mostrar5=preg_5+" <br> "+resp_5;
-    var mostrarPyR_1=document.getElementById("pr1");
-    var mostrarPyR_2=document.getElementById("pr2");
-    var mostrarPyR_3=document.getElementById("pr3");
-    var mostrarPyR_4=document.getElementById("pr4");
-    var mostrarPyR_5=document.getElementById("pr5");
-    
-    document.getElementById("titulo_resp").innerHTML="Aquí se muestran tus respuestas";
-    //document.getElementById("").innerHTML=mostrar1;
-    alert(resp_1);
-    mostrarPyR_1.appendChild(mostrar1);
-    mostrarPyR_2.appendChild(mostrar2);
-    mostrarPyR_3.appendChild(mostrar3);
-    mostrarPyR_4.appendChild(mostrar4);
-    mostrarPyR_5.appendChild(mostrar5);*/
+function mesas(){
+    var nm=parseInt(document.getElementById("NumMesas").value);
+    var texto="";
+    for(i=0; i<nm; i++){
+        texto+="Mesa "+(i+1)+" Adultos: <select id='adulto"+(i+1)+"' name='adulto"+(i+1)+"' onChange='num_adultos()'";
+        texto+="<option value='0'>0</option>"
+        texto+="<option value='1'>1</option>";
+        texto+="<option value='2'>2</option>";
+        texto+="<option value='3'>3</option>";
+        texto+="<option value='4'>4</option></select>";
+
+        texto+="Mesa "+(i+1)+" Menores: <select id='menor"+(i+1)+"' name='menor"+(i+1)+"' onChange='num_menores()'";
+        texto+="<option value='0'>0</option>";
+        texto+="<option value='1'>1</option>";
+        texto+="<option value='2'>2</option>";
+        texto+="<option value='3'>3</option>
+        texto+="<option value='4'>4</option></select>";
+        
+        texto+="<div style='margin-top:10px; display:none;' id='edades"+(i+1)+"'></div>";
+        texto+="<hr/ style='width:450px;'>";
+    }
+    document.getElementById("mesas").innerHTML=texto;
+}
+function num_adultos(adultos){
+    document.getElementById("edades"+(adultos)).style.display = "block";
+
+    var y=document.getElementById("adulto"+adultos).value;
+    var lista=document.getElementById("menor"+adultos);
+    lista.length=(4-y)+1;
+    y=lista.length;
+    for(i=0;i<=y;i++){
+        lista.options[i].value=i;
+        lista.options[i].text=i;
+    }
+}
+function num_menores(menores){
+    document.getElementById("edades"+(menores)).style.display ="block";
+    var z= document.getElementById("menor"+menores).value;
+    var texto2="Edades: ";
+    for(i=0;i<z;i++){
+        texto2+="menor "+(i+1)+":<input type='text' id='edad"+menores+""+(i+1)+"' name='edad"+menores+"_"+(i+1)+"' size='5'>";
+    }
+    document.getElementById("edades"+menores).innerHTML=texto2;
+}*/
+
+document.getElementById('reservacion').addEventListener("change",function(){mesas();});
+document.getElementById('mostrar').addEventListener("click",function(){mostrar();});
+
+let mesas=function(){
+    let nm=document.getElementById('reservacion').value;
+    let contenido='';
+    for(i=0; i<nm; i++){
+        contenido+='<h3>mesa: '+(i+1)+'</h3>'+
+        '<h4>Número de comensales</h4>'+
+        'Adultos: <input type="text" name="adultos" id="adultos'+i+'"/><br>'+
+        'Menores: <input type="text" name="menores" id="menores'+i+'"/><br><hr>';
+    }
+    document.getElementById("mesas").innerHTML=contenido;
+}
+
+let mostrar=function(){
+    let mesas=document.getElementById("mesas").innerHTML;
+    localStorage.setItem('mesa',mesas);
+    let cAdultos=document.getElementsByName("adultos");
+    let vAdultos=[];
+    for (let i=0; i<cAdultos.length; i++){
+        vAdultos[i]=cAdultos[i].value;
+        localStorage.setItem('vAdultos', vAdultos);
+    }
+    let cMenores=document.getElementsByName("menores");
+    let vMenores=[];
+    for (let i=0; i<cMenores.length; i++){
+        vMenores[i]=cMenores[i].value;
+        localStorage.setItem('vMenores', vMenores);
+    }
+    window.open("DatosReservacion.html");
 }
